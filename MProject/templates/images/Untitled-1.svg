@@ -1,0 +1,32 @@
+<div class="svg-pie">
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="120%" height="120%">
+
+	<g>
+		<path d="M50,25v25H25C25,36.19,36.19,25,50,25z" fill="#fff" stroke="#000000" ></path>
+		<text style="font-size: 4px;" text-anchor="middle" x="40%" y="38%">BUY AT</text>
+	</g>
+
+	<g>
+		<path d="M50,50v25c-13.81,0-25-11.19-25-25H50z" fill="#fff" stroke="#000000"></path>
+		<text style="font-size: 4px;" text-anchor="middle" x="40%" y="58%">SELL AT</text>
+	</g>
+
+	<g>
+	<path d="M59.57,73.1C56.62,74.32,53.39,75,50,75V50L59.57,73.1z" fill="#fff" stroke="#000000"></path>
+	<text style="font-size: 2.5px;" text-anchor="middle" x="54%" y="72%">12345</text>
+	</g>
+	<path d="M67.68,67.68c-2.3,2.301-5.05,4.15-8.109,5.42L50,50L67.68,67.68z" fill="#fff" stroke="#000000"></path>
+
+	<path d="M73.1,59.57c-1.27,3.06-3.119,5.81-5.42,8.109L50,50L73.1,59.57z" fill="#fff" stroke="#000000"></path>
+
+	<path d="M73.1,40.43L50,50l17.68-17.68C69.98,34.62,71.83,37.37,73.1,40.43z" fill="#fff" stroke="#000000"></path>
+
+	<path d="M67.68,32.32L50,50l9.57-23.1C62.63,28.17,65.38,30.02,67.68,32.32z" fill="#fff" stroke="#000000"></path>
+
+	<path d="M59.57,26.9L50,50V25C53.39,25,56.62,25.68,59.57,26.9z" fill="#fff" stroke="#000000"></path>
+
+	<path d="M75,50c0,3.39-0.68,6.62-1.9,9.57L50,50l23.1-9.57C74.32,43.38,75,46.61,75,50z" fill="#fff" stroke="#000000">
+	</path>
+
+</svg>
+</div>

@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Omen Cluster</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+  <link rel="stylesheet" href="{% static 'css/font.css' %}">
+  <script src="https://cdn.amcharts.com/lib/4/core.js"></script>
+  <script src="https://cdn.amcharts.com/lib/4/charts.js"></script>
+</head>
+
+<body>
+  <svg style="display:none;">
+    <symbol id="logo" viewBox="0 0 214 21">
+      <path d="M10.0523 0.871999C7.29225 0.871999 4.91625 1.808 2.97225
+          3.704C1.02825 5.576 0.04425 7.88 0.04425 10.592C0.04425 13.304 1.00425
+          15.608 2.92425 17.48C4.86825 19.352 7.22025 20.288 10.0043
+          20.288C12.7883 20.288 15.1403 19.352 17.0603 17.456C19.0043 15.56
+          19.9643 13.256 19.9643 10.52C19.9643 7.808 19.0043 5.504 17.0843
+          3.656C15.1883 1.808 12.8363 0.871999 10.0523 0.871999ZM10.0283
+          6.008C11.2043 6.008 12.1883 6.464 12.9803 7.376C13.7963 8.264 14.2043
+          9.344 14.2043 10.568C14.2043 11.792 13.7963 12.872 13.0043
+          13.784C12.2123 14.696 11.2043 15.152 10.0283 15.152C8.85225 15.152
+          7.84425 14.696 7.02825 13.784C6.23625 12.872 5.82825 11.792 5.82825
+          10.568C5.82825 9.344 6.23625 8.264 7.02825 7.376C7.84425 6.464 8.85225
+          6.008 10.0283 6.008ZM39.0994
+          10.16H39.1234V20H44.7154V1.208H37.4914L33.7474 12.728L29.7874
+          1.208H22.8034V20H28.2514V10.304H28.2994L31.6834 20H35.7874L39.0994
+          10.16ZM62.1921
+          1.208H48.6081V20H62.2641V15.248H54.1761V12.728H61.5681V8.288H54.1761V5.936H62.1921V1.208ZM71.0991
+          10.112H71.1231L77.6031 20H83.3151V1.208H77.6991V10.424H77.6751L71.6751
+          1.208H65.4831V20H71.0991V10.112ZM101.739 0.871999C98.8826 0.871999
+          96.5066 1.808 94.6106 3.704C92.7146 5.6 91.7786 7.88 91.7786
+          10.592C91.7786 13.4 92.7146 15.728 94.5866 17.552C96.4826 19.376
+          98.8106 20.288 101.619 20.288C103.851 20.288 105.723 19.76 107.211
+          18.728C108.723 17.672 109.755 16.376 110.355 14.84L105.363
+          12.464C104.643 14.216 103.419 15.104 101.667 15.104C100.491 15.104
+          99.5066 14.672 98.7386 13.784C97.9706 12.896 97.5866 11.84 97.5866
+          10.568C97.5866 9.296 97.9706 8.24 98.7386 7.352C99.5306 6.464 100.491
+          6.032 101.667 6.032C103.347 6.032 104.571 6.896 105.315 8.624L110.283
+          6.272C109.707 4.76 108.699 3.488 107.259 2.456C105.819 1.4 103.971
+          0.871999 101.739 0.871999ZM112.78
+          1.208V20H125.764V15.104H118.444V1.208H112.78ZM137.743
+          1.208V12.632C137.743 14.288 136.975 15.128 135.463 15.128C134.023
+          15.128 133.159 14.264 133.159 12.512V1.208H127.447V12.584C127.447
+          17.288 130.111 20.288 135.415 20.288C140.695 20.288 143.479 17.408
+          143.479 12.512V1.208H137.743ZM153.906 20.264C158.61 20.264 161.346
+          17.96 161.346 14.216C161.346 12.656 160.77 11.408 159.642
+          10.52C158.514 9.608 156.762 8.792 154.362 8.096C152.874 7.664 152.13
+          7.184 152.13 6.632C152.13 5.984 152.682 5.528 153.666 5.528C155.082
+          5.528 156.09 6.2 156.69 7.52L161.106 5.12C159.93 2.312 157.506
+          0.895998 153.882 0.895998C151.866 0.895998 150.162 1.448 148.77
+          2.576C147.402 3.704 146.706 5.168 146.706 6.968C146.706 10.232 149.034
+          11.936 153.354 13.088C155.034 13.544 155.874 14 155.874 14.504C155.874
+          15.152 155.202 15.608 153.93 15.608C152.25 15.608 151.05 14.84 150.354
+          13.28L145.914 15.728C147.21 18.752 149.874 20.264 153.906
+          20.264ZM167.238
+          20H172.902V6.104H177.918V1.208H162.198V6.104H167.238V20ZM193.887
+          1.208H180.303V20H193.959V15.248H185.871V12.728H193.263V8.288H185.871V5.936H193.887V1.208ZM213.138
+          20L209.01 12.776C211.338 11.792 212.49 9.992 212.49 7.376C212.49 5.336
+          211.794 3.8 210.378 2.768C208.962 1.736 207.114 1.208 204.81
+          1.208H197.178V20H202.866V13.736H203.466L206.97 20H213.138ZM202.866
+          5.816H204.666C206.154 5.816 206.898 6.392 206.898 7.568C206.898 8.6
+          206.154 9.296 204.642 9.296H202.866V5.816Z" />
+    </symbol>
+    <symbol id="down" viewBox="0 0 16 16">
+      <polygon points="3.81 4.38 8 8.57 12.19 4.38 13.71 5.91 8 11.62 2.29
+            5.91 3.81 4.38" />
+    </symbol>
+    <symbol id="users" viewBox="0 0 16 16">
+      <path d="M15.1579 12.6316V13.4737C15.1579 14.4 14.4 15.1579 13.4737
+              15.1579H1.68421C0.749474 15.1579 0 14.4 0 13.4737V1.68421C0
+              0.757895 0.749474 0 1.68421 0H13.4737C14.4 0 15.1579 0.757895
+              15.1579 1.68421V2.52632H7.57895C6.64421 2.52632 5.89474 3.28421
+              5.89474 4.21053V10.9474C5.89474 11.8737 6.64421 12.6316 7.57895
+              12.6316H15.1579ZM7.57895
+              10.9474H16V4.21053H7.57895V10.9474ZM10.9474 8.84211C10.2484
+              8.84211 9.68421 8.27789 9.68421 7.57895C9.68421 6.88 10.2484
+              6.31579 10.9474 6.31579C11.6463 6.31579 12.2105 6.88 12.2105
+              7.57895C12.2105 8.27789 11.6463 8.84211 10.9474 8.84211Z" />
+    </symbol>
+    <symbol id="collection" viewBox="0 0 16 16">
+      <rect width="7" height="7" rx="1" ry="1" />
+      <rect y="9" width="7" height="7" rx="1" ry="1" />
+      <rect x="9" width="7" height="7" rx="1" ry="1" />
+      <rect x="9" y="9" width="7" height="7" rx="1" ry="1" />
+    </symbol>
+    <symbol id="charts" viewBox="0 0 16 16">
+      <path d="M0 3.36842H3.36842V0H0V3.36842ZM0
+                        7.57895H3.36842V4.21053H0V7.57895ZM4.21053
+                        7.57895H7.57895V4.21053H4.21053V7.57895ZM8.42105
+                        7.57895H11.7895V4.21053H8.42105V7.57895ZM4.21053
+                        3.36842H7.57895V0H4.21053V3.36842ZM8.42105
+                        0V3.36842H11.7895V0H8.42105ZM12.6316
+                        7.57895H16V4.21053H12.6316V7.57895ZM0
+                        11.7895H3.36842V8.42105H0V11.7895ZM4.21053
+                        11.7895H7.57895V8.42105H4.21053V11.7895ZM8.42105
+                        11.7895H11.7895V8.42105H8.42105V11.7895ZM12.6316
+                        11.7895H16V8.42105H12.6316V11.7895ZM12.6316
+                        0V3.36842H16V0H12.6316Z" />
+    </symbol>
+    <symbol id="profile" viewBox="0 0 16 16">
+      <path d="M0 1.77778V14.2222C0 15.2 0.791111 16 1.77778
+                          16H14.2222C15.2 16 16 15.2 16 14.2222V1.77778C16 0.8
+                          15.2 0 14.2222 0H1.77778C0.791111 0 0 0.8 0
+                          1.77778ZM10.6667 5.33333C10.6667 6.80889 9.47556 8 8
+                          8C6.52444 8 5.33333 6.80889 5.33333 5.33333C5.33333
+                          3.85778 6.52444 2.66667 8 2.66667C9.47556 2.66667
+                          10.6667 3.85778 10.6667 5.33333ZM2.66667
+                          12.4444C2.66667 10.6667 6.22222 9.68889 8
+                          9.68889C9.77778 9.68889 13.3333 10.6667 13.3333
+                          12.4444V13.3333H2.66667V12.4444Z" />
+    </symbol>
+    <symbol id="pages" viewBox="0 0 16 16">
+      <rect x="4" width="12" height="12" transform="translate(20 12) rotate(-180)" />
+      <polygon points="2 14 2 2 0 2 0 14 0 16 2 16 14 16
+                              14 14 2 14" />
+    </symbol>
+    <symbol id="gann" viewBox="0 0 16 16">
+      <path d="M7.26024 0.993432V15.3576C7.26024 15.8788
+                                6.78429 16.2697 6.28414 16.1557C2.67822 15.3414
+                                0 12.076 0 8.17554C0 4.27505 2.67822 1.00972
+                                6.28414 0.19542C6.78429 0.0814183 7.26024
+                                0.472281 7.26024 0.993432V0.993432ZM8.89783
+                                0.993432V6.5388C8.89783 6.98666 9.26084 7.3531
+                                9.70452 7.3531H15.182C15.6983 7.3531 16.0855
+                                6.87266 15.9725 6.35965C15.2868 3.29789 12.9071
+                                0.887573 9.88199 0.19542C9.37378 0.0814183
+                                8.89783 0.472281 8.89783
+                                0.993432V0.993432ZM8.89783
+                                9.81228V15.3576C8.89783 15.8788 9.37378 16.2697
+                                9.88199 16.1557C12.9152 15.4635 15.2949 13.045
+                                15.9806 9.98328C16.0935 9.47841 15.6983 8.98983
+                                15.19 8.98983H9.71259C9.26084 8.99798 8.89783
+                                9.36441 8.89783 9.81228Z" />
+    </symbol>
+    <symbol id="back" viewBox="0 0 16 16">
+      <path
+        d="M9.09168 0.935908C8.67388 0.518109 8.00029 0.518109 7.58249 0.935908L0.496959 8.02144C0.164425 8.35397 0.164425 8.89114 0.496959 9.22368L7.58249 16.3092C8.00029 16.727 8.67388 16.727 9.09168 16.3092C9.50948 15.8914 9.50948 15.2178 9.09168 14.8L2.91849 8.61829L9.10021 2.43657C9.50948 2.0273 9.50948 1.34518 9.09168 0.935908Z" />
+    </symbol>
+    <symbol id="console" viewBox="0 0 16 16">
+      <path d="M4.79999 11.7333C5.9782 11.7333
+                                    6.93332 10.7782 6.93332 9.60001C6.93332
+                                    8.4218 5.9782 7.46667 4.79999
+                                    7.46667C3.62178 7.46667 2.66666 8.4218
+                                    2.66666 9.60001C2.66666 10.7782 3.62178
+                                    11.7333 4.79999 11.7333Z" />
+      <path d="M9.86666 13.3333C10.603 13.3333
+                                      11.2 12.7363 11.2 12C11.2 11.2636 10.603
+                                      10.6666 9.86666 10.6666C9.13028 10.6666
+                                      8.53333 11.2636 8.53333 12C8.53333 12.7363
+                                      9.13028 13.3333 9.86666 13.3333Z" />
+      <path d="M10.1333 9.06663C11.9007 9.06663
+                                        13.3333 7.63394 13.3333 5.86663C13.3333
+                                        4.09931 11.9007 2.66663 10.1333
+                                        2.66663C8.36604 2.66663 6.93335 4.09931
+                                        6.93335 5.86663C6.93335 7.63394 8.36604
+                                        9.06663 10.1333 9.06663Z" />
+    </symbol>
+    <symbol id="info" viewBox="0 0 16 16">
+      <path
+        d="M8 0C3.584 0 0 3.584 0 8C0 12.416 3.584 16 8 16C12.416 16 16 12.416 16 8C16 3.584 12.416 0 8 0ZM8 12C7.56 12 7.2 11.64 7.2 11.2V8C7.2 7.56 7.56 7.2 8 7.2C8.44 7.2 8.8 7.56 8.8 8V11.2C8.8 11.64 8.44 12 8 12ZM8.8 4.8C8.8 5.24183 8.44183 5.6 8 5.6V5.6C7.55817 5.6 7.2 5.24183 7.2 4.8V4.8C7.2 4.35817 7.55817 4 8 4V4C8.44183 4 8.8 4.35817 8.8 4.8V4.8Z" />
+    </symbol>
+    <symbol id="collapse" viewBox="0 0 16
+                                            16">
+      <polygon points="11.62 3.81 7.43 8
+                                              11.62 12.19 10.09 13.71 4.38 8
+                                              10.09 2.29 11.62 3.81" />
+    </symbol>
+    <symbol id="search" viewBox="0 0 16
+                                              16">
+      <path
+        d="M8 0C3.584 0 0 3.584 0 8C0 12.416 3.584 16 8 16C12.416 16 16 12.416 16 8C16 3.584 12.416 0 8 0ZM11.2 8.8H8.8V11.2C8.8 11.64 8.44 12 8 12C7.56 12 7.2 11.64 7.2 11.2V8.8H4.8C4.36 8.8 4 8.44 4 8C4 7.56 4.36 7.2 4.8 7.2H7.2V4.8C7.2 4.36 7.56 4 8 4C8.44 4 8.8 4.36 8.8 4.8V7.2H11.2C11.64 7.2 12 7.56 12 8C12 8.44 11.64 8.8 11.2 8.8Z" />
+
+    </symbol>
+  </svg>
+
+  <header class="page-header">
+    <nav>
+      <a href="#0" aria-label="forecastr logo" class="logo">
+        <svg width="240" height="49">
+          <use xlink:href="#logo"></use>
+        </svg>
+      </a>
+      <button class="toggle-mob-menu" aria-expanded="false" aria-label="open menu">
+        <svg width="20" height="20" aria-hidden="true">
+          <use xlink:href="#down"></use>
+        </svg>
+      </button>
+      <ul class="admin-menu">
+        <li class="menu-heading">
+          <h3>Portfolio</h3>
+        </li>
+        <li>
+          <a href="#account" onclick="openLinks(event, 'account')" id="defaultOpen" class="tablinks active">
+            <svg>
+              <use xlink:href="#users"></use>
+            </svg>
+            <span>Account Balance</span>
+          </a>
+        </li>
+        <li>
+          <a href="#consolee" onclick="openLinks(event, 'consolee')" class="tablinks">
+            <svg>
+              <use xlink:href="#console"></use>
+            </svg>
+            <span>Console</span>
+          </a>
+        </li>
+        <li>
+          <a href="#chartt" onclick="openLinks(event, 'chartt')" class="tablinks">
+            <svg>
+              <use xlink:href="#charts"></use>
+            </svg>
+            <span style="padding-bottom: 5px;">Charts</span>
+          </a>
+        </li>
+        <li class="menu-heading">
+          <h3>Prediction</h3>
+        </li>
+        <li>
+          <a href="#gann_wheel" onclick="openLinks(event, 'gann_wheel')" class="tablinks">
+            <svg>
+              <use xlink:href="#gann"></use>
+            </svg>
+            <span>Gann Wheel</span>
+          </a>
+        </li>
+        <li>
+          <a href="#gann_square" onclick="openLinks(event, 'gann_square')" class="tablinks">
+            <svg>
+              <use xlink:href="#collection"></use>
+            </svg>
+            <span>Gann Square</span>
+          </a>
+        </li>
+        <li>
+          <div class="switch">
+            <input type="checkbox" id="mode" checked>
+            <label for="mode">
+              <span></span>
+              <span>Dark</span>
+            </label>
+          </div>
+          <button class="collapse-btn" aria-expanded="true" aria-label="collapse menu">
+            <svg aria-hidden="true">
+              <use xlink:href="#collapse"></use>
+            </svg>
+            <span>Collapse</span>
+          </button>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+  <div class="page-content" id="account">
+    <section class="search-and-user">
+      <form>
+        <input type="search" placeholder="Add Stocks or Cryptos" disabled>
+        <button type="submit" aria-label="submit form" onclick="openLinks(event, 'Add')" class="tablinks">
+          <svg aria-hidden="true">
+            <use xlink:href="#search"></use>
+          </svg>
+        </button>
+      </form>
+      <div class="admin-profile">
+        <span class="greeting">Hello,
+          <b>{{ user.first_name }}</b></span>
+
+        <div class="dropdown">
+          <button onclick="myFunction()" class="dropbtn"><svg>
+              <use xlink:href="#profile"></use>
+            </svg></button>
+          <div id="myDropdown" class="dropdown-content">
+            <a href="#profilee" onclick="openLinks(event, 'profilee')" class="tablinks">Profile</a>
+            <a href="/logout">Logout</a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+    <section class="grid">
+      <div class=account-cards>
+        <h4>{{ amt }}</h4>
+        <label for="balance_available">Invested Capital</label>
+      </div>
+      <div class="account-cards">
+        <h4>{{ qty }}</h4>
+        <label for="balance_used">Quantities Owned</label>
+      </div>
+      
+      <div >
+        <table class="container">
+          <thead>
+            <tr style="background-color:none;">
+              <th>
+                <h1>Item Name</h1>
+              </th>
+              <th>
+                <h1>Buying Price</h1>
+              </th>
+              <th>
+                <h1>Quantity</h1>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+          {% for i in tabledata %}
+            <tr>
+              <td> {{ i.name }} </td>
+              <td> {{ i.buyprice }} </td>
+              <td>  {{ i.quantity }} </td>
+            </tr>
+          {% endfor %} 
+          </tbody>
+        </table>
+      </div>
+
+
+    </section>
+  </div>
+
+  <div class="page-content" id="consolee">
+    <section class="grid1">
+      <div>
+      <div class="head">
+      <span>
+        Asset Allocation 
+      </span></div>
+      <div class="pie-chart">
+        <script src="https://cdn.amcharts.com/lib/4/core.js"></script>
+<script src="https://cdn.amcharts.com/lib/4/charts.js"></script>
+<script src="https://cdn.amcharts.com/lib/4/themes/animated.js"></script>
+<div id="chartdiv"></div>
+<div id="legend"></div>
+      </div>
+      </div>
+    </section>
+  </div>
+
+  <div class="page-content" id="chartt">
+    <section class="grid1">
+      <div>
+      <div class="head">
+      <span>
+        Asset Charts 
+      </span></div>
+      <div class="candle" style="align-self: center; height: 80%; width: 85%;">
+                <!-- TradingView Widget BEGIN -->
+        <div class="tradingview-widget-container" style="height:100%;width:100%">
+          <div class="tradingview-widget-container__widget" style="height:calc(100% - 32px);width:100%"></div>
+          <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js" async>
+          {
+          "autosize": true,
+          "symbol": "BINANCE:ETHUSDT",
+          "interval": "D",
+          "timezone": "Etc/UTC",
+          "theme": "light",
+          "style": "1",
+          "locale": "en",
+          "enable_publishing": false,
+          "withdateranges": true,
+          "allow_symbol_change": true,
+          "details": true,
+          "calendar": false,
+          "support_host": "https://www.tradingview.com"
+          }
+          </script>
+        </div>
+        <!-- TradingView Widget END -->
+      </div>
+      </div>
+    </section>
+  </div>
+
+  <div class="page-content" id="gann_wheel">
+    <section class="grid2">
+      <div>
+        <svg version="1.1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="55px" height="55px"
+          viewBox="0 0 55 55">
+
+          <g>
+            <path fill="#5be249" d="M25,1.875V25H1.875C1.875,12.226,12.226,1.875,25,1.875z"><title>Buy at</title></path>
+            <text transform="matrix(1 0 0 1 11.4907 11.8242)" font-size="2.775">Buy At</text>
+            <text id="buy-at" transform="matrix(1 0 0 1 11.4907 17.1245)" font-size="2.775">  0</text>
+          </g>
+          <g>
+            <path fill="#fc5367" d="M25,25v23.125C12.226,48.125,1.875,37.774,1.875,25H25z"><title>Sell at</title></path>
+            <text transform="matrix(1 0 0 1 11.4907 30.4893)" font-size="2.775">Sell At</text>
+            <text id="sell-at" transform="matrix(1 0 0 1 11.4907 35.6826)" font-size="2.775">  0</text>
+          </g>
+          <g>
+            <path fill="#fc7988" d="M33.852,46.367c-2.727,1.13-5.715,1.758-8.852,1.758V25L33.852,46.367z"><title>Sell Target 1</title></path>
+            <text id="sell-Target-1" transform="matrix(0.9375, -0.2528, 0.2528, 0.9675, 26.2588, 47.1283)" font-size="1.85">  0</text>
+          </g>
+          <g>
+            <path fill="#fd9faa" d="M41.354,41.354c-2.129,2.128-4.67,3.84-7.502,5.014L25,25L41.354,41.354z"><title>Sell Target 2</title></path>
+            <text id="sell-Target-2" transform="matrix(0.8148, -0.5022, 0.5022, 0.8448, 34.157, 44.6314)" font-size="1.85">  0</text>
+          </g>
+          <g>
+            <path fill="#fec5cc" d="M46.367,33.852c-1.174,2.832-2.886,5.375-5.014,7.502L25,25L46.367,33.852z"><title>Sell Target 3</title></path>
+            <text id="sell-Target-3" transform="matrix(0.5595, -0.8004, 0.8004, 0.5995, 41.1535, 39.9355)" font-size="1.85">  0</text>
+          </g>
+          <g>
+            <path fill="#c8f5c2" d="M46.367,16.148L25,25L41.354,8.646C43.481,10.774,45.193,13.318,46.367,16.148z" ><title>Buy Target 3</title></path>
+            <text id="buy-Target-3" transform="matrix(0.5437, 0.8393, -0.8393, 0.5437, 40.2449, 10.5092)" font-size="1.85">  0</text>
+          </g>
+          <g>
+            <path fill="#a3ee99" d="M41.354,8.646L25,25l8.852-21.367C36.684,4.808,39.225,6.519,41.354,8.646z" ><title>Buy Target 2</title></path>
+            <text id="buy-Target-2" transform="matrix(0.8327, 0.5538, -0.5538, 0.8327, 33.4496, 6.0085)" font-size="1.85">  0</text>
+          </g>
+          <g>
+            <path fill="#7fe871" d="M33.852,3.633L25,25V1.875C28.137,1.875,31.125,2.505,33.852,3.633z" ><title>Buy Target 1</title></path>
+            <text id="buy-Target-1" transform="matrix(0.9572, 0.2595, -0.2895, 0.9572, 25.8684, 4.2707)" font-size="1.85">  0</text>
+          </g>
+          <text transform="matrix(1 0 0 1 24.0781 1.5195)" font-size="1.5" style="fill: #5367FC;">90°</text>
+          <text transform="matrix(1 0 0 1 33.8516 3.3877)" font-size="1.5" style="fill: #5367FC;">60°</text>
+          <text transform="matrix(1 0 0 1 41.7314 8.646)" font-size="1.5" style="fill: #5367FC;">45°</text>
+          <text transform="matrix(1 0 0 1 46.7109 16.1484)" font-size="1.5" style="fill: #5367FC;">30°</text>
+          <text transform="matrix(1 0 0 1 46.7109 35.3496)" font-size="1.5" style="fill: #5367FC;">330°</text>
+          <text transform="matrix(1 0 0 1 41.7305 42.71)" font-size="1.5" style="fill: #5367FC;">315°</text>
+          <text transform="matrix(1 0 0 1 33.8496 47.8623)" font-size="1.5" style="fill: #5367FC;">300°</text>
+          <text transform="matrix(1 0 0 1 24.0781 49.6309)" font-size="1.5" style="fill: #5367FC;">270°</text>
+          <g>
+            <path fill="#ffcb86b2"
+              d="M48.125,25c0,3.137-0.628,6.125-1.758,8.852L25,25l21.368-8.852C47.497,18.877,48.125,21.864,48.125,25z"><title>Last Traded Price</title></path>
+            <text id="ltp" transform="matrix(0.9999 0.0135 -0.0135 0.9999 40.1904 25.2578)" font-size="1.85">  0</text>
+            <text transform="matrix(1 0 0 1 33.8496 25.5747)" font-size="2">LTP</text>
+          </g>
+
+        </svg>
+
+
+        <h1 class="fix-middle"><a href="#" class="info-tooltip" data-content="If the price of the asset reaches the 'BUY AT' zone then BUY/LONG (Targets in GREEN). If the price of the asset reaches the 'SELL AT' zone then SELL/SHORT (Targets in RED).">
+          <svg aria-hidden="true" class="wheel-info">
+            <use xlink:href="#info"></use>
+          </svg>
+        
+        </a></h1>
+
+      </div>
+      <div class="gann-table">
+        <div>
+          <table class="container">
+            <caption>Buy Targets</caption>
+            <thead>
+              <tr style="background-color:none;">
+                <th>
+                  <h1>Target 1</h1>
+                </th>
+                <th>
+                  <h1>Target 2</h1>
+                </th>
+                <th>
+                  <h1>Target 3</h1>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td id="bt1">0</td>
+                <td id="bt2">0</td>
+                <td id="bt3">0</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div>
+          <table class="container">
+            <caption>Sell Targets</caption>
+            <thead>
+              <tr style="background-color:none;">
+                <th>
+                  <h1>Target 1</h1>
+                </th>
+                <th>
+                  <h1>Target 2</h1>
+                </th>
+                <th>
+                  <h1>Target 3</h1>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td id="st1">0</td>
+                <td id="st2">0</td>
+                <td id="st3">0</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="wheel-calculate">
+        <form class="from">
+          <ul class="flex-outer">
+            <li>
+              <input type="text" id="gann-wheel-calculate" placeholder="Last Traded price">
+            </li>
+            <li class="top">
+              <a class="cta" href="#" onclick="calculate()">Calculate</a>
+            </li>
+          </ul>
+        </form>
+      </div>
+    </section>
+  </div>
+
+  <div class="page-content" id="gann_square">
+    <section class="grid3">
+      <div>
+        <span>GANN SQUARE</span>
+        <a class="submit cta" href="#account" onclick="history.back(-1)">
+          <svg aria-hidden="true" class="back">
+            <use xlink:href="#back"></use>
+          </svg></a>
+      </div>
+      
+      <div class="square red">
+        <label for="balance_available" class="resistance">Resistance 1</label>
+        <h4 id="resistance-1">0</h4>
+      </div>
+      <div class="square">
+        <label for="balance_available" class="resistance">Resistance 2</label>
+        <h4 id="resistance-2">0</h4>
+      </div>
+      <div class="square">
+        <label for="balance_available" class="resistance">Resistance 3</label>
+        <h4 id="resistance-3">0</h4>
+      </div>
+      <div class="square">
+        <label for="balance_available" class="resistance">Resistance 4</label>
+        <h4 id="resistance-4">0</h4>
+      </div>
+      <div class="square">
+        <label for="balance_available" class="resistance">Resistance 5</label>
+        <h4 id="resistance-5">0</h4>
+      </div>
+      <div class="square">
+        <label for="balance_available" class="resistance">Resistance 6</label>
+        <h4 id="resistance-6">0</h4>
+        </div>
+      <div class="div-7">
+        <input type="text" id="low-number" placeholder="Enter All Time Low Price" class="center">
+      </div>
+      <div class="div-7">
+        <a class="calculate" href="#" onclick="calculateS()">Calculate</a>
+      </div>
+      <div class="div-7 ">
+        <input type="text" id="high-number" placeholder="Enter All Time high Price" class="center">
+
+      </div>
+      
+      <div class="square green">
+        <label for="balance_available" class="support">Support 1</label>
+        <h4 id="support-1">0</h4>
+      </div>
+      <div class="square">
+        <label for="balance_available" class="support">Support 2</label>
+        <h4 id="support-2">0</h4>
+      </div>
+      <div class="square">
+        <label for="balance_available" class="support">Support 3</label>
+        <h4 id="support-3">0</h4>
+      </div>
+      <div class="square">
+        <label for="balance_available" class="support">Support 4</label>
+        <h4 id="support-4">0</h4>
+      </div>
+      <div class="square">
+        <label for="balance_available" class="support">Support 5</label>
+        <h4 id="support-5">0</h4>
+      </div>
+      <div class="square">
+        <label for="balance_available" class="support">Support 6</label>
+        <h4 id="support-6">0</h4>
+      </div>
+      <div>
+        <svg aria-hidden="true" class="info">
+          <use xlink:href="#info"></use>
+        </svg>
+        <p>
+          This provides important resistances and supports levels. 
+        </p>
+      </div>
+    </section>
+  </div>
+
+  
+  <div class="page-content" id="profilee">
+    <section class="grid5">
+      <div class="add-stocks">
+        <span>
+          PROFILE
+        </span>
+        <a class="submit cta" href="#" onclick="goBack()">
+          <svg aria-hidden="true" class="back">
+              <use xlink:href="#back"></use>
+          </svg>
+        </a>
+      </div>
+      <div class="add-form">
+        <form class="from" method='POST' action='/passwordchange'>
+          {% csrf_token %}
+          <ul class="flex-outer">
+            <li>
+              <input type="password" name='pass1' placeholder="New Password">
+            </li>
+            <li>
+              <input type="password" name='pass2' placeholder="Confirm Password">
+            </li>
+            <li>
+              <input class="cta" type="submit" value="Update Password">
+            </li>
+          </ul>
+        </form>
+      </div>
+    </section>
+  </div>
+
+  <div class="page-content" id="Add">
+    <section class="grid5">
+      <div class="add-stocks">
+        <span>
+          ADD STOCKS AND CRYPTOS
+        </span>
+        <a class="submit cta" href="#" onclick="goBack()">
+          <svg aria-hidden="true" class="back">
+              <use xlink:href="#back"></use>
+          </svg>
+        </a>
+      </div>
+      <div class="add-form">
+        <form class="from" action="addition" method="POST">
+          {% csrf_token %}
+          <ul class="flex-outer">
+            <li>
+              <input type="text" id="name" name='name' placeholder="Item Name" required>
+            </li>
+            <li>
+              <input type="text" id="price" name='price' placeholder="Buy Price(Numbers Only)" required> 
+            </li>
+            <li>
+              <input type="text" id="quantity" name='quantity' placeholder="Quantities Owned(Numbers Only)" required>
+            </li>
+            <li>
+              <input class="cta" type="submit" value="Add Entry">
+            </li>
+          </ul>
+        </form>
+      </div>
+    </section>
+  </div>
+
+
+  <script type="text/javascript" src="{% static 'js/dashboard.js' %}"></script>
+</body>
+
+</html>
